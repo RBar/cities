@@ -1,0 +1,18 @@
+[{
+    "id": 1,
+    "name": "test",
+    "local_name": "test",
+    "lat": 1.0,
+    "lng": 1.0,
+    "created_at": "2018-01-07 17:08:01",
+    "updated_at": "2018-01-07 17:08:01",
+    "country_id": 1,
+    "country": {
+        "id": 1,
+        "name": "test",
+        "code": "test",
+        "created_at": "2018-01-07 17:08:01",
+        "updated_at": "2018-01-07 17:08:01",
+        "continent_id": 1
+    }
+}]
