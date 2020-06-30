@@ -3,6 +3,7 @@ import 'package:cities_of_the_world_demo/cities_of_the_world/presentation/widget
 import 'package:cities_of_the_world_demo/cities_of_the_world/presentation/widgets/map_tab_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 //* Page to see the datails of a City
@@ -35,68 +36,71 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(FontAwesomeIcons.chevronLeft),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         backgroundColor: const Color(0xff5B01B0),
         title: Center(
-            child: Expanded(
-          child: Text(
-            widget.city.name,
-            overflow: TextOverflow.ellipsis,
-            style:
-                GoogleFonts.roboto(fontSize: 26.0, fontWeight: FontWeight.w500),
-          ),
+            child: Text(
+          widget.city.name,
+          overflow: TextOverflow.ellipsis,
+          style:
+              GoogleFonts.roboto(fontSize: 26.0, fontWeight: FontWeight.w500),
         )),
       ),
       body: SafeArea(
           child: Container(
         width: double.infinity,
         height: double.infinity,
-        child: Column(
-          children: [_tabbar(), _tabBarView(size)],
-        ),
-      )),
-    );
-  }
-
-  TabBar _tabbar() {
-    return TabBar(
-      controller: _controller,
-      labelPadding: const EdgeInsets.symmetric(),
-      tabs: [
-        Tab(
-          icon: Text(
-            'City Info',
-            style:
-                GoogleFonts.roboto(fontSize: 22.0, fontWeight: FontWeight.w500),
+        child: DefaultTabController(
+          length: 2,
+          child: Scaffold(
+            body: TabBarView(
+              children: [
+                InfoTabWidget(
+                  city: widget.city,
+                ),
+                MapTabWidget(
+                  city: widget.city,
+                ),
+              ],
+            ),
+            bottomNavigationBar: TabBar(
+              labelPadding: const EdgeInsets.symmetric(),
+              tabs: [
+                Tab(
+                  icon: Column(
+                    children: [
+                      const Icon(FontAwesomeIcons.table),
+                      Text(
+                        'City info',
+                        style: GoogleFonts.roboto(),
+                      )
+                    ],
+                  ),
+                ),
+                Tab(
+                  icon: Column(
+                    children: [
+                      const Icon(FontAwesomeIcons.mapMarkedAlt),
+                      Text('Map view', style: GoogleFonts.roboto())
+                    ],
+                  ),
+                ),
+              ],
+              labelColor: const Color(0xff5B01B0),
+              unselectedLabelColor: const Color.fromRGBO(186, 202, 207, 1.0),
+              indicatorColor: Colors.transparent,
+            ),
+            backgroundColor: Colors.white,
           ),
         ),
-        Tab(
-          icon: Text('Map View',
-              style: GoogleFonts.roboto(
-                  fontSize: 22.0, fontWeight: FontWeight.w500)),
-        ),
-      ],
-      labelColor: const Color(0xff5B01B0),
-      indicatorPadding: const EdgeInsets.symmetric(horizontal: 20.0),
-      unselectedLabelColor: const Color.fromRGBO(186, 202, 207, 1.0),
-      indicatorWeight: 3.0,
-      indicatorSize: TabBarIndicatorSize.tab,
-      indicatorColor: const Color(0xff5B01B0),
-    );
-  }
-
-  Widget _tabBarView(Size size) {
-    return Expanded(
-      child: TabBarView(controller: _controller, children: [
-        InfoTabWidget(
-          city: widget.city,
-        ),
-        MapTabWidget(
-          city: widget.city,
-        ),
-      ]),
+      )),
     );
   }
 }

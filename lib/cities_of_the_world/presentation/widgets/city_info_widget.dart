@@ -1,5 +1,5 @@
 import 'package:cities_of_the_world_demo/cities_of_the_world/domain/entities/city_entity.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // * Widget that shows the info of the city in the details page
@@ -15,7 +15,7 @@ class InfoTabWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-      color: Colors.white,
+      color: CupertinoColors.white,
       child: Column(
         children: [
           _textRow(label: 'Name: ', text: city.name),

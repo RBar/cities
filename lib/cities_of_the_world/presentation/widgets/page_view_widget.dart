@@ -1,9 +1,10 @@
 import 'package:cities_of_the_world_demo/cities_of_the_world/domain/entities/city_entity.dart';
+import 'package:cities_of_the_world_demo/cities_of_the_world/presentation/pages/detail_page.dart';
 import 'package:cities_of_the_world_demo/cities_of_the_world/presentation/state_management/page_view_bloc/citiesoftheworld_bloc.dart';
 import 'package:cities_of_the_world_demo/cities_of_the_world/presentation/widgets/error_widget.dart';
 import 'package:cities_of_the_world_demo/cities_of_the_world/presentation/widgets/loading_widget.dart';
 import 'package:cities_of_the_world_demo/core/routes/router.gr.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -86,7 +87,7 @@ class _PageViewWidgetState extends State<PageViewWidget> {
 
   Widget _buildLoaderListItem() {
     return const Center(
-      child: CircularProgressIndicator(),
+      child: CupertinoActivityIndicator(),
     );
   }
 
@@ -117,8 +118,11 @@ class _PageViewWidgetState extends State<PageViewWidget> {
   Widget _card(Size size, City city) {
     return GestureDetector(
       onTap: () {
-        ExtendedNavigator.of(context).pushNamed(Routes.detailPage,
-            arguments: DetailPageArguments(city: city));
+        Navigator.of(context).push(CupertinoPageRoute(builder: (context) {
+          return DetailPage(city: city);
+        }));
+        // ExtendedNavigator.of(context).pushNamed(Routes.detailPage,
+        //     arguments: DetailPageArguments(city: city));
       },
       child: Container(
         width: (size.width * 0.7 > 400) ? 400 : size.width * 0.7,
@@ -131,7 +135,8 @@ class _PageViewWidgetState extends State<PageViewWidget> {
               child: Text(
                 '# ${city.id.toString()}',
                 style: const TextStyle(
-                    color: Colors.white,
+                    fontFamily: 'Ingleby',
+                    color: CupertinoColors.white,
                     fontSize: 30.0,
                     fontWeight: FontWeight.w800),
               ),
@@ -148,7 +153,8 @@ class _PageViewWidgetState extends State<PageViewWidget> {
                         city.name,
                         overflow: TextOverflow.clip,
                         style: const TextStyle(
-                            color: Colors.white,
+                            fontFamily: 'Ingleby',
+                            color: CupertinoColors.white,
                             fontSize: 30.0,
                             fontWeight: FontWeight.w800),
                       ),
@@ -160,7 +166,7 @@ class _PageViewWidgetState extends State<PageViewWidget> {
                       children: [
                         const Icon(
                           FontAwesomeIcons.mapMarkerAlt,
-                          color: Colors.white,
+                          color: CupertinoColors.white,
                           size: 16.0,
                         ),
                         const SizedBox(
@@ -169,7 +175,8 @@ class _PageViewWidgetState extends State<PageViewWidget> {
                         Text(
                           city.country.name,
                           style: const TextStyle(
-                              color: Colors.white,
+                              fontFamily: 'Ingleby',
+                              color: CupertinoColors.white,
                               fontSize: 16.0,
                               fontWeight: FontWeight.w500),
                         ),
@@ -186,12 +193,13 @@ class _PageViewWidgetState extends State<PageViewWidget> {
   Widget _image(City city, Size size) {
     return Container(
       width: (size.width * 0.7 > 400) ? 400 : size.width * 0.7,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(40.0),
-          boxShadow: const [
-            BoxShadow(
-                color: Colors.black26, offset: Offset(2, 2), blurRadius: 3)
-          ]),
+      decoration:
+          BoxDecoration(borderRadius: BorderRadius.circular(40.0), boxShadow: [
+        BoxShadow(
+            color: CupertinoColors.black.withOpacity(0.26),
+            offset: const Offset(2, 2),
+            blurRadius: 3)
+      ]),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(40.0),
         child: const Image(
