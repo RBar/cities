@@ -1,5 +1,5 @@
 # Cities of the world demo app
-The app was created in dart-flutter because i had some issues with the computer where i work with swift, if you could gime me some extra days i could create the app in also swift 
+The app was created in dart-flutter because i had some issues with the computer where i work with swift, if you could give me some extra days i could create the app in also swift 
 
 ## Getting Started
 
