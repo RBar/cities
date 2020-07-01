@@ -7,7 +7,8 @@ Created with flutter
 
 To explain better how i build the project i created a video.
 The video provides an overview of the main concepts that i used to create the app. 
- - [Video link](https://youtu.be/7WLSmuzaD-A)
+ - [Video of the app working](https://youtu.be/DFmDRCRkE9Y)
+ - [Video explaining the app](https://youtu.be/7WLSmuzaD-A)
  - [presentation link](https://drive.google.com/file/d/1DZjx14fyyceqUVHewiLkiJkiwcx5v2Pu/view?usp=sharing)
 
 ## Run the project

@@ -58,8 +58,14 @@ class CitiesoftheworldBloc
           // then return a LoadState saying that has reached last page and
           // return the same list of cities that previews state
           return LoadedState(cities: _cities, rachedLastPage: true);
+        } else if (event.page == responseData.pagination.lastPage) {
+          //if the requested page is equal to the last page of the response
+          //then add the cities of the response to the list of cities
+          //an return it, and say that reached last page is true
+          _cities.addAll(responseData.items);
+          return LoadedState(cities: _cities, rachedLastPage: true);
         } else {
-          //if the request page is not greater than the last of the response
+          //if the requested page is not greater than the last of the response
           //then add the cities of the response to the list of cities
           // and return it
           // also say that reached last page is false
