@@ -14,7 +14,7 @@ The video provides an overview of the main concepts that i used to create the ap
 ## Run the project
 
 To run the project on your pc/mac, you need to have xcode or android simulator, the flutter sdk and vscode. In vs code you need to have the flutter and dart extension then clone the repository and execute the flutter packages get command in the terminal or click in the button inside of the pubspec.yaml file (like the images show).
-### if you are running in mac you need to change the version of flutter_svg to 0.17.0 or 0.16.0 because of  incompatibility then restart vscode
+### if you are running in mac you maybe need to change the version of flutter_svg to 0.17.0 or 0.16.0(in pubspec.yaml file) because of  incompatibility then restart vscode 
 - [pubspec.yaml](https://drive.google.com/file/d164w0qBNT1uCtFkrUdNhtgVZb2ouJE-Tk/view?usp=sharing)
 - [packages get command](https://drive.google.com/file/d/1gUo6-P0x51wEyKVkHQoqP-9YJshiAcvI/view?usp=sharing)
 
