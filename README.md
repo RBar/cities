@@ -16,7 +16,7 @@ To run the project on your pc/mac, you need to have xcode or android simulator, 
 - [pubspec.yaml](https://drive.google.com/file/d164w0qBNT1uCtFkrUdNhtgVZb2ouJE-Tk/view?usp=sharing)
 - [packages get command](https://drive.google.com/file/d/1gUo6-P0x51wEyKVkHQoqP-9YJshiAcvI/view?usp=sharing)
 
-_ Note: if you are running in mac you will maybe need to change the version of flutter_svg to 0.17.0 or 0.16.0(in pubspec.yaml file) because of  incompatibility then restart vscode_
+_Note: if you are running in mac you will maybe need to change the version of flutter_svg to 0.17.0 or 0.16.0(in pubspec.yaml file) because of  incompatibility then restart vscode_
 
 
 I let you a link to download the apk in case that you have an android and want to test the app in a real device
