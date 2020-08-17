@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -23,7 +23,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -47,8 +46,8 @@ dependencies:
   #json serialization
   json_annotation: ^3.0.1
   #local data source
-  path_provider: 1.6.11
-  hive: ^1.4.1+1
+  path_provider: ^1.6.11
+  hive: ^1.4.3
   path_provider_platform_interface: ^1.0.2
   #internet connection checker
   data_connection_checker: ^0.3.4
@@ -56,11 +55,8 @@ dependencies:
   flutter_map: ^0.9.0
   latlong: ^0.6.1
   map_controller: ^0.8.0
-  
+  device_preview: ^0.4.5
 
-
-
-  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -71,18 +67,18 @@ dev_dependencies:
   lint: ^1.2.0
   auto_route_generator: ^0.5.0
   json_serializable: ^3.3.0
-  hive_generator: ^0.7.0+2
-
-#overrides due to a bug on hive 
+  hive_generator: ^0.7.1
+#overrides due to a bug on hive
 dependency_overrides:
-  dartx: ^0.3.0  
-  path: ^1.7.0
+  analyzer: "0.39.14"
+# dependency_overrides:
+# dartx: ^0.3.0
+# path: ^1.7.0
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

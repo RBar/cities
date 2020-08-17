@@ -8,13 +8,13 @@ part of 'city_model.dart';
 
 class CityModelAdapter extends TypeAdapter<CityModel> {
   @override
-  final typeId = 0;
+  final int typeId = 0;
 
   @override
   CityModel read(BinaryReader reader) {
-    var numOfFields = reader.readByte();
-    var fields = <int, dynamic>{
-      for (var i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return CityModel(
       id: fields[0] as int,
@@ -52,6 +52,16 @@ class CityModelAdapter extends TypeAdapter<CityModel> {
       ..writeByte(8)
       ..write(obj.country);
   }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CityModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }
 
 // **************************************************************************

@@ -48,8 +48,7 @@ void main() {
     test('should cache the responseDataClassModel when the method is call',
         () async {
       //arrange
-      when(mockHiveInterface.openBox(any))
-          .thenAnswer((realInvocation) async => mockHiveBox);
+      when(mockHiveInterface.openBox(any)).thenAnswer((_) async => mockHiveBox);
       //act
       await localDataSource.cacheResponseData(tResponseModel, tpage);
       //assert

@@ -8,13 +8,13 @@ part of 'pagination_model.dart';
 
 class PaginationModelAdapter extends TypeAdapter<PaginationModel> {
   @override
-  final typeId = 2;
+  final int typeId = 2;
 
   @override
   PaginationModel read(BinaryReader reader) {
-    var numOfFields = reader.readByte();
-    var fields = <int, dynamic>{
-      for (var i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return PaginationModel(
       currentPage: fields[0] as int,
@@ -37,6 +37,16 @@ class PaginationModelAdapter extends TypeAdapter<PaginationModel> {
       ..writeByte(3)
       ..write(obj.total);
   }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PaginationModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }
 
 // **************************************************************************

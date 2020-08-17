@@ -1,5 +1,7 @@
 import 'package:cities_of_the_world_demo/cities_of_the_world/data/datasources/local_data_source.dart';
 import 'package:cities_of_the_world_demo/cities_of_the_world/data/datasources/remote_data_source.dart';
+import 'package:cities_of_the_world_demo/cities_of_the_world/data/models/ggphoto/ggphoto_model.dart';
+import 'package:cities_of_the_world_demo/cities_of_the_world/domain/entities/gg_photo.dart';
 import 'package:cities_of_the_world_demo/cities_of_the_world/domain/entities/response.dart';
 import 'package:cities_of_the_world_demo/cities_of_the_world/domain/repositories/c_o_w_repositories.dart';
 import 'package:cities_of_the_world_demo/core/network/network_info.dart';
@@ -58,6 +60,22 @@ class CitiesOfTheWorldRepositoryImpl implements CitiesOfTheWorldRepository {
         page: page,
         filter: filter);
   }
+
+  @override
+  Future<Either<Failure, GGPhoto>> getggPhoto(String place) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final GGPhotoModel ggPhotoModel =
+            await remoteDataSource.getGGPhoto(place);
+        final GGPhoto ggPhoto = ggPhotoModel.toDomain();
+        return Right(ggPhoto);
+      } catch (e) {
+        return const Left(ServerFailure());
+      }
+    } else {
+      return const Left(ConnectionFailure());
+    }
+  }
 }
 
 class _GetRemoteAndLocalCitiesWithCountry {
@@ -77,6 +95,7 @@ class _GetRemoteAndLocalCitiesWithCountry {
         try {
           final ResponseDataClass response =
               await localDataSource.getLocalCitiesAndCountriesAtPage(page);
+
           return Right(response);
         } catch (e) {
           return const Left(CacheFailure());

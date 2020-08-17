@@ -28,7 +28,7 @@ class CitiesoftheworldBloc
   final List<City> _cities =
       []; //list of cities that will be returned from the ''Atpage'' event
   CitiesoftheworldBloc({
-    @required @required GetCitiesAndCountriesAtPage citiesAndCountriesAtPage,
+    @required GetCitiesAndCountriesAtPage citiesAndCountriesAtPage,
   })  : assert(citiesAndCountriesAtPage != null),
         getCitiesAndCountriesAtPage = citiesAndCountriesAtPage;
 

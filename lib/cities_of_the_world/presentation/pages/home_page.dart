@@ -21,11 +21,11 @@ class HomePage extends StatelessWidget {
 
   Widget _square1Logo() {
     return Positioned(
-      top: 20,
-      right: 0,
+      top: 30,
+      right: 20,
       child: Container(
-          width: 100,
-          height: 100,
+          width: 50,
+          height: 50,
           child: const Image(image: AssetImage('assets/logo.png'))),
     );
   }

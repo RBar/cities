@@ -1,12 +1,20 @@
 import 'package:cities_of_the_world_demo/cities_of_the_world/domain/entities/city_entity.dart';
+import 'package:cities_of_the_world_demo/cities_of_the_world/domain/entities/gg_photo.dart';
+import 'package:cities_of_the_world_demo/cities_of_the_world/domain/repositories/c_o_w_repositories.dart';
+import 'package:cities_of_the_world_demo/cities_of_the_world/domain/usecases/get_gg_photo.dart';
 import 'package:cities_of_the_world_demo/cities_of_the_world/presentation/pages/detail_page.dart';
 import 'package:cities_of_the_world_demo/cities_of_the_world/presentation/state_management/page_view_bloc/citiesoftheworld_bloc.dart';
+import 'package:cities_of_the_world_demo/cities_of_the_world/presentation/utils/get_google_image.dart';
 import 'package:cities_of_the_world_demo/cities_of_the_world/presentation/widgets/error_widget.dart';
 import 'package:cities_of_the_world_demo/cities_of_the_world/presentation/widgets/loading_widget.dart';
-import 'package:cities_of_the_world_demo/core/routes/router.gr.dart';
+import 'package:cities_of_the_world_demo/core/error/failures.dart';
+import 'package:cities_of_the_world_demo/injection.dart';
+import 'package:dartz/dartz.dart' as dartz;
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:auto_route/auto_route.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PageViewWidget extends StatefulWidget {
@@ -121,8 +129,6 @@ class _PageViewWidgetState extends State<PageViewWidget> {
         Navigator.of(context).push(CupertinoPageRoute(builder: (context) {
           return DetailPage(city: city);
         }));
-        // ExtendedNavigator.of(context).pushNamed(Routes.detailPage,
-        //     arguments: DetailPageArguments(city: city));
       },
       child: Container(
         width: (size.width * 0.7 > 400) ? 400 : size.width * 0.7,
@@ -191,22 +197,37 @@ class _PageViewWidgetState extends State<PageViewWidget> {
   }
 
   Widget _image(City city, Size size) {
-    return Container(
-      width: (size.width * 0.7 > 400) ? 400 : size.width * 0.7,
-      decoration:
-          BoxDecoration(borderRadius: BorderRadius.circular(40.0), boxShadow: [
-        BoxShadow(
-            color: CupertinoColors.black.withOpacity(0.26),
-            offset: const Offset(2, 2),
-            blurRadius: 3)
-      ]),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(40.0),
-        child: const Image(
-          image: AssetImage('assets/vector.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
+    final repository = getIt<CitiesOfTheWorldRepository>();
+
+    final String cityinfo = '${city.name} ${city.country.name}';
+    return FutureBuilder<dartz.Either<Failure, GGPhoto>>(
+      future: GetGGPhoto(repository).call(GGPhotoParams(place: cityinfo)),
+      builder: (BuildContext context, snapshot) {
+        if (snapshot.hasData) {
+          return snapshot.data.fold((failure) => Container(), (ggPhoto) {
+            return Container(
+              width: (size.width * 0.7 > 400) ? 400 : size.width * 0.7,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40.0),
+                  boxShadow: [
+                    BoxShadow(
+                        color: CupertinoColors.black.withOpacity(0.26),
+                        offset: const Offset(2, 2),
+                        blurRadius: 3)
+                  ]),
+              height: 400,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(40.0),
+                child: Image(
+                  image: NetworkImage(Utils().getggplacesImage(ggPhoto)),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            );
+          });
+        }
+        return const CircularProgressIndicator();
+      },
     );
   }
 }

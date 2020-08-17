@@ -9,13 +9,13 @@ part of 'response_model.dart';
 class ResponseDataClassModelAdapter
     extends TypeAdapter<ResponseDataClassModel> {
   @override
-  final typeId = 3;
+  final int typeId = 3;
 
   @override
   ResponseDataClassModel read(BinaryReader reader) {
-    var numOfFields = reader.readByte();
-    var fields = <int, dynamic>{
-      for (var i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ResponseDataClassModel(
       items: (fields[0] as List)?.cast<CityModel>(),
@@ -32,6 +32,16 @@ class ResponseDataClassModelAdapter
       ..writeByte(1)
       ..write(obj.pagination);
   }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ResponseDataClassModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }
 
 // **************************************************************************

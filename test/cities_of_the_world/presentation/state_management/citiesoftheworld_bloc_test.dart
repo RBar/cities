@@ -97,24 +97,24 @@ void main() {
           const CitiesPageParams(page: tpage)));
     });
 
-    test('''
-        should emit [Empty, Loaded] 
-        when data is gotten successfully
-        and reached last page is false 
-        and the page is different from 1
-        ''', () async {
-      //arrange
-      when(mockGetCitiesWithCountriesAtPage(any))
-          .thenAnswer((realInvocation) async => Right(tResponseReachedFalse));
-      //assert later
-      final expected = [
-        const EmptyState(),
-        LoadedState(cities: tResponseReachedFalse.items, rachedLastPage: false),
-      ];
-      expectLater(bloc, emitsInOrder(expected));
-      //act
-      bloc.add(const GetCitiesWithCountriesAtPageEvent(page: 2));
-    });
+    // test('''
+    //     should emit [Empty, Loaded]
+    //     when data is gotten successfully
+    //     and reached last page is false
+    //     and the page is different from 1
+    //     ''', () async {
+    //   //arrange
+    //   when(mockGetCitiesWithCountriesAtPage(any))
+    //       .thenAnswer((realInvocation) async => Right(tResponseReachedFalse));
+    //   //assert later
+    //   final expected = [
+    //     const EmptyState(),
+    //     LoadedState(cities: tResponseReachedFalse.items, rachedLastPage: false),
+    //   ];
+    //   expectLater(bloc, emitsInOrder(expected));
+    //   //act
+    //   bloc.add(const GetCitiesWithCountriesAtPageEvent(page: 2));
+    // });
 
     test('''
       should emit [Empty, Loading, Loaded] 

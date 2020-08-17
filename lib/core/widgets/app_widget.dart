@@ -1,12 +1,13 @@
+import 'package:cities_of_the_world_demo/cities_of_the_world/presentation/pages/home_page.dart';
 import 'package:cities_of_the_world_demo/cities_of_the_world/presentation/state_management/page_view_bloc/citiesoftheworld_bloc.dart';
 import 'package:cities_of_the_world_demo/cities_of_the_world/presentation/state_management/query_bloc/querycities_bloc.dart';
 import 'package:cities_of_the_world_demo/core/routes/router.gr.dart';
 import 'package:cities_of_the_world_demo/injection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/services.dart';
+import 'package:auto_route/auto_route.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({Key key}) : super(key: key);
@@ -24,15 +25,18 @@ class AppWidget extends StatelessWidget {
         ),
         BlocProvider<QuerycitiesBloc>(
           create: (context) => getIt<QuerycitiesBloc>(),
-        )
+        ),
       ],
       child: MaterialApp(
+        // locale: DevicePreview.of(context).locale,
+        // builder: DevicePreview.appBuilder,
         builder: ExtendedNavigator(
           router: Router(), // lib/core/routes/router.dart
         ),
         debugShowCheckedModeBanner: false,
         title: 'Cities of the world',
         theme: ThemeData(fontFamily: 'Ingleby'),
+        home: HomePage(),
       ),
     );
   }

@@ -2,6 +2,8 @@ import 'package:cities_of_the_world_demo/cities_of_the_world/data/models/paginat
 import 'package:cities_of_the_world_demo/cities_of_the_world/data/models/responsedata/response_model.dart';
 import 'package:cities_of_the_world_demo/core/widgets/app_widget.dart';
 import 'package:cities_of_the_world_demo/injection.dart';
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
@@ -22,5 +24,9 @@ void main() async {
   Hive.registerAdapter(PaginationModelAdapter());
   Hive.registerAdapter(ResponseDataClassModelAdapter());
 
-  runApp(const AppWidget()); //run app widget (/lib/core/widget/app_widget.dart)
+  runApp(const AppWidget());
+  // runApp(DevicePreview(
+  //   builder: (context) => const AppWidget(),
+  //   enabled: !kReleaseMode,
+  // )); //run app widget (/lib/core/widget/app_widget.dart)
 }

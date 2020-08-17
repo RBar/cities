@@ -1,3 +1,4 @@
+import 'package:cities_of_the_world_demo/cities_of_the_world/domain/entities/gg_photo.dart';
 import 'package:cities_of_the_world_demo/cities_of_the_world/domain/entities/response.dart';
 import 'package:cities_of_the_world_demo/core/error/failures.dart';
 import 'package:dartz/dartz.dart';
@@ -12,4 +13,5 @@ abstract class CitiesOfTheWorldRepository {
   // gets the cities with the country information filtered by the query at a certaing page
   Future<Either<Failure, ResponseDataClass>>
       getFilteredCitiesAndCountriesAtPage(int page, String filter);
+  Future<Either<Failure, GGPhoto>> getggPhoto(String place);
 }

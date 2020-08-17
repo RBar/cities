@@ -17,6 +17,7 @@ import 'package:cities_of_the_world_demo/cities_of_the_world/domain/repositories
 import 'package:cities_of_the_world_demo/cities_of_the_world/domain/usecases/get_cities_with_countries_at_page.dart';
 import 'package:cities_of_the_world_demo/cities_of_the_world/domain/usecases/get_filtered_cities_with_countries_at_page.dart';
 import 'package:cities_of_the_world_demo/cities_of_the_world/domain/usecases/get_filtered_cities_with_countries.dart';
+import 'package:cities_of_the_world_demo/cities_of_the_world/domain/usecases/get_gg_photo.dart';
 import 'package:cities_of_the_world_demo/cities_of_the_world/presentation/state_management/query_bloc/querycities_bloc.dart';
 import 'package:cities_of_the_world_demo/cities_of_the_world/presentation/state_management/page_view_bloc/citiesoftheworld_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -51,6 +52,8 @@ void $initGetIt(GetIt g, {String environment}) {
       GetFilteredCitiesAndCountriesAtPage(g<CitiesOfTheWorldRepository>()));
   g.registerLazySingleton<GetFilteredCitiesWithCountries>(
       () => GetFilteredCitiesWithCountries(g<CitiesOfTheWorldRepository>()));
+  g.registerLazySingleton<GetGGPhoto>(
+      () => GetGGPhoto(g<CitiesOfTheWorldRepository>()));
   g.registerFactory<QuerycitiesBloc>(() => QuerycitiesBloc(
       filteredCitiesWithCountries: g<GetFilteredCitiesWithCountries>(),
       filteredCitiesAndCountriesAtPage:

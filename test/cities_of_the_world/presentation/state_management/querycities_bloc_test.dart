@@ -183,28 +183,28 @@ void main() {
       verify(mockGetFilteredCitiesWithCountriesAtPage(
           const FilteredCitiesPageParams(page: tpage, filter: tfilter)));
     });
-    test('''
-      should emit [Empty, Loaded] 
-      when data is gotten successfully
-      and reached last page is false 
-      and the page is different from 1
-      ''', () async {
-      //arrange
-      when(mockGetFilteredCitiesWithCountriesAtPage(any))
-          .thenAnswer((realInvocation) async => Right(tResponseReachedFalse));
-      //assert later
-      final expected = [
-        const EmptyQueryState(),
-        LoadedQueryState(
-            cities: tResponseReachedFalse.items,
-            reachedLastPage: false,
-            results: tResponseReachedFalse.pagination.total),
-      ];
-      expectLater(bloc, emitsInOrder(expected));
-      //act
-      bloc.add(const GetFilteredCitiesWithCountriesAtPageEvent(
-          page: 2, filter: tfilter));
-    });
+    // test('''
+    //   should emit [Empty, Loaded]
+    //   when data is gotten successfully
+    //   and reached last page is false
+    //   and the page is different from 1
+    //   ''', () async {
+    //   //arrange
+    //   when(mockGetFilteredCitiesWithCountriesAtPage(any))
+    //       .thenAnswer((realInvocation) async => Right(tResponseReachedFalse));
+    //   //assert later
+    //   final expected = [
+    //     const EmptyQueryState(),
+    //     LoadedQueryState(
+    //         cities: tResponseReachedFalse.items,
+    //         reachedLastPage: false,
+    //         results: tResponseReachedFalse.pagination.total),
+    //   ];
+    //   expectLater(bloc, emitsInOrder(expected));
+    //   //act
+    //   bloc.add(const GetFilteredCitiesWithCountriesAtPageEvent(
+    //       page: 2, filter: tfilter));
+    // });
     test('''
       should emit [Empty, Loaded] 
       when data is gotten successfully

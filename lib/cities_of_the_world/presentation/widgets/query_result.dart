@@ -36,7 +36,7 @@ class _QueryResultState extends State<QueryResult> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<QuerycitiesBloc, QuerycitiesState>(
-      builder: (context, state) {
+      builder: (_, state) {
         return state.map(
           emptyState: (value) {
             return const Center(
@@ -62,7 +62,7 @@ class _QueryResultState extends State<QueryResult> {
                     child: ListView.builder(
                       itemCount: calculateListItemCount(state),
                       controller: _controller,
-                      itemBuilder: (context, index) {
+                      itemBuilder: (_, index) {
                         if (index >= state.cities.length) {
                           return _buildLoaderListItem();
                         } else {

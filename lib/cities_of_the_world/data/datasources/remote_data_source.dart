@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:cities_of_the_world_demo/cities_of_the_world/data/datasources/local_data_source.dart';
+import 'package:cities_of_the_world_demo/cities_of_the_world/data/models/ggphoto/ggphoto_model.dart';
 import 'package:cities_of_the_world_demo/cities_of_the_world/data/models/responsedata/response_model.dart';
 import 'package:cities_of_the_world_demo/cities_of_the_world/domain/entities/response.dart';
+import 'package:cities_of_the_world_demo/core/apikey/apikey.dart';
 import 'package:cities_of_the_world_demo/core/error/exceptions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
@@ -13,6 +15,7 @@ abstract class CitiesOfTheWorldRemoteDataSource {
   Future<ResponseDataClass> getCitiesAndCountriesAtPage(int page);
   Future<ResponseDataClass> getFilteredCitiesAndCountriesAtPage(
       int page, String filter);
+  Future<GGPhotoModel> getGGPhoto(String place);
 }
 
 //lazysingleton is for dependency injection purposes
@@ -65,6 +68,27 @@ class CitiesOfTheWorldRemoteDataSourceImpl
       }
       return responseDataClassModel
           .toDomain(); //transform the model to a domain responsedataclass and return it
+    } else {
+      throw ServerException(); // if error throw a ServerException
+    }
+  }
+
+  @override
+  Future<GGPhotoModel> getGGPhoto(String place) async {
+    final response = await client.get(
+      'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=$place&inputtype=textquery&fields=photos&key=$apikey',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    ); //get the data from the api
+    if (response.statusCode == 200) {
+      final decodeData = json.decode(response.body); //decode the data
+
+      final ggPhotoModel = GGPhotoModel.fromJson(
+          decodeData['candidates'][0]['photos'][0] as Map<String,
+              dynamic>); //transform the data to responsedataclass model
+
+      return ggPhotoModel;
     } else {
       throw ServerException(); // if error throw a ServerException
     }
