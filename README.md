@@ -6,7 +6,6 @@ The app was created in dart-flutter because i had some issues with the computer 
 
 To explain better how i build the project i created a video.
 The video provides an overview of the main concepts that i used to create the app. 
- - [Video of the app working](https://youtu.be/DFmDRCRkE9Y)
  - [Video explaining the app](https://youtu.be/7WLSmuzaD-A)
  - [presentation link](https://drive.google.com/file/d/1DZjx14fyyceqUVHewiLkiJkiwcx5v2Pu/view?usp=sharing)
 
